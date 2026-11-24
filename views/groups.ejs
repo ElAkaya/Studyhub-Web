@@ -35,7 +35,7 @@
     <tbody>
       <% groups.forEach((group) => { %>
         <tr>
-          <td><%= group.name %></td>
+          <td><a href="/groups/<%= group.id %>"><%= group.name %></a></td>
           <td><%= group.courseCode %></td>
           <td><%= group.capacity %></td>
           <td><%= group.meetingTime %></td>

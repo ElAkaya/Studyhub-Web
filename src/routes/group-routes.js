@@ -82,6 +82,16 @@ function createGroupRouter(groupManager) {
     }
   });
 
+  router.get('/:id', (request, response) => {
+    const group = groupManager.findGroupById(request.params.id);
+    if (group === null) {
+      response.status(404).render('group-not-found', { title: 'Group not found' });
+      return;
+    }
+    const course = groupManager.getCourses().find((candidate) => candidate.code === group.courseCode);
+    response.render('group-details', { title: group.name, group, course });
+  });
+
   return router;
 }
 
