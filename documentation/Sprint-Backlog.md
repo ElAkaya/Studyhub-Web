@@ -27,3 +27,21 @@ still left on each task; past observations are never rewritten.
 4. Open a pull request into `dev`; merge only after CI passes.
 5. Commit one coherent change at a time: a subject of about 50 characters, a
    blank line, then what changed and why. A fix references the commit it corrects.
+
+## Progress record – November 24, 2026
+
+The Nov 30 and Dec 4 checkpoint columns stay blank until those dates.
+
+| Task | Status | Evidence |
+| --- | --- | --- |
+| S0 | Complete | PR #1; dev and release protected, `build-and-test` required |
+| T1 | Complete | PR #2 – Course, CourseCatalog |
+| T2 | Complete | PR #3 – StudyGroup |
+| T3 | Complete | PR #4 – GroupManager |
+| T4 | Complete | PR #5 – group list page, home redirect |
+| T5 | Complete | PR #6 – create-group page |
+| T6 | Complete | PR #7 – group details and not-found pages |
+| T7 | Complete | PR #8 – delete with confirmation |
+| T8 | Complete on macOS; VLab check pending | 137 passing tests, 100% line coverage; manual walkthrough in [Verification.md](Verification.md) |
+| T9 | Not started | |
+| T10 | Not started | |
