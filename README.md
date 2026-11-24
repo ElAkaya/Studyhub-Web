@@ -43,6 +43,14 @@ npm test       # Jest unit and route tests
 - CI (`.github/workflows/ci.yml`) runs on every push and pull request to `dev`
   and `release`: install, ESLint compile check, then all tests.
 
+## Deployment
+
+The app runs on AWS Elastic Beanstalk (Node.js 24 on Amazon Linux 2023,
+single instance, US East (Ohio)) as environment `Studyhub-web-env` of the
+`studyhub-web` application. `.github/workflows/deploy.yml` redeploys it on
+every push to `release`: it installs, lints and tests the code, packages it
+with `git archive`, and uploads it as a new application version.
+
 ## AI assistance
 
 This project was developed with assistance from Claude (Anthropic). Claude
