@@ -1,0 +1,9 @@
+<%- include('partials/header') %>
+<h1>Delete this study group?</h1>
+<p>You are about to delete <strong><%= group.name %></strong> (<%= group.courseCode %>). This cannot be undone.</p>
+
+<form class="actions" method="post" action="/groups/<%= group.id %>/delete">
+  <button type="submit" class="danger">Delete</button>
+  <a class="button secondary" href="/groups/<%= group.id %>">Cancel</a>
+</form>
+<%- include('partials/footer') %>

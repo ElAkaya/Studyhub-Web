@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+<p><a href="/groups">&larr; Back to study groups</a></p>
+<h1><%= group.name %></h1>
+
+<dl class="details">
+  <dt>Course</dt>
+  <dd><%= course ? course.toString() : group.courseCode %></dd>
+  <dt>Description</dt>
+  <dd><%= group.description %></dd>
+  <dt>Meeting time</dt>
+  <dd><%= group.meetingTime %></dd>
+  <dt>Location</dt>
+  <dd><%= group.location %></dd>
+  <dt>Maximum members</dt>
+  <dd><%= group.capacity %></dd>
+</dl>
+
+<div class="actions">
+  <a class="button secondary" href="/groups">Close</a>
+  <a class="button danger" href="/groups/<%= group.id %>/delete">Delete group</a>
+</div>
+<%- include('partials/footer') %>
