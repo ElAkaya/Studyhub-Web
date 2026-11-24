@@ -92,6 +92,23 @@ function createGroupRouter(groupManager) {
     response.render('group-details', { title: group.name, group, course });
   });
 
+  router.get('/:id/delete', (request, response) => {
+    const group = groupManager.findGroupById(request.params.id);
+    if (group === null) {
+      response.status(404).render('group-not-found', { title: 'Group not found' });
+      return;
+    }
+    response.render('group-delete', { title: `Delete ${group.name}`, group });
+  });
+
+  router.post('/:id/delete', (request, response) => {
+    if (!groupManager.deleteGroup(request.params.id)) {
+      response.status(404).render('group-not-found', { title: 'Group not found' });
+      return;
+    }
+    response.redirect(303, '/groups');
+  });
+
   return router;
 }
 
