@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Route tests for the base StudyHub web application.
+ * Route tests for application-wide behavior.
  *
  * @author Moria El Akaya
  * AI assistance: initial version drafted with Claude (Anthropic); reviewed,
@@ -10,10 +10,10 @@ const request = require('supertest');
 const { createApp } = require('../src/app');
 
 describe('base application', () => {
-  test('home page responds with the StudyHub heading', async () => {
+  test('home page redirects to the group list', async () => {
     const response = await request(createApp()).get('/');
-    expect(response.status).toBe(200);
-    expect(response.text).toContain('<h1>StudyHub</h1>');
+    expect(response.status).toBe(302);
+    expect(response.headers.location).toBe('/groups');
   });
 
   test('stylesheet is served from the public folder', async () => {

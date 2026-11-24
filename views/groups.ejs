@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+<h1>Study groups</h1>
+<p class="notice">Demonstration semester catalog &middot; not an official university listing</p>
+
+<form class="filters" method="get" action="/groups">
+  <label>Course
+    <select name="course">
+      <option value="">All courses</option>
+      <% courses.forEach((course) => { %>
+        <option value="<%= course.code %>" <%= course.code === selectedCourse ? 'selected' : '' %>><%= course.toString() %></option>
+      <% }) %>
+    </select>
+  </label>
+  <label>Search code
+    <input type="text" name="search" value="<%= search %>" placeholder="Enter a course code, such as CS101 or CS">
+  </label>
+  <button type="submit">Apply</button>
+  <a class="button secondary" href="/groups">Show all</a>
+</form>
+
+<p class="count"><%= groups.length %> <%= groups.length === 1 ? 'group' : 'groups' %> shown</p>
+
+<% if (groups.length === 0) { %>
+  <p class="empty-state">
+    <%= totalGroups === 0 ? 'No study groups have been created yet.' : 'No groups match this course and search.' %>
+  </p>
+<% } else { %>
+  <table class="group-list">
+    <thead>
+      <tr><th>Group</th><th>Course</th><th>Seats</th><th>Meets</th></tr>
+    </thead>
+    <tbody>
+      <% groups.forEach((group) => { %>
+        <tr>
+          <td><%= group.name %></td>
+          <td><%= group.courseCode %></td>
+          <td><%= group.capacity %></td>
+          <td><%= group.meetingTime %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+<%- include('partials/footer') %>
