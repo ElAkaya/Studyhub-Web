@@ -1,0 +1,48 @@
+name: Deploy to AWS Elastic Beanstalk
+
+on:
+  push:
+    branches: [release]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: test-and-deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js 24.13.0
+        uses: actions/setup-node@v5
+        with:
+          node-version: '24.13.0'
+          cache: 'npm'
+
+      - name: Install npm 11.14.0
+        run: npm install -g npm@11.14.0
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Compile check (ESLint)
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+
+      - name: Package application
+        run: git archive -o deploy.zip HEAD
+
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v22
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: studyhub-web
+          environment_name: Studyhub-web-env
+          region: us-east-2
+          version_label: release-${{ github.run_number }}-${{ github.run_attempt }}
+          deployment_package: deploy.zip
+          wait_for_environment_recovery: 180
