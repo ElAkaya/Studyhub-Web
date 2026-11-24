@@ -43,5 +43,5 @@ The Nov 30 and Dec 4 checkpoint columns stay blank until those dates.
 | T6 | Complete | PR #7 – group details and not-found pages |
 | T7 | Complete | PR #8 – delete with confirmation |
 | T8 | Complete on macOS; VLab check pending | 137 passing tests, 100% line coverage; manual walkthrough in [Verification.md](Verification.md) |
-| T9 | Not started | |
-| T10 | Not started | |
+| T9 | Complete | PR #10 – deploy workflow; environment `Studyhub-web-env` (us-east-2) created and checked on Nov 24 |
+| T10 | Complete | This documentation update and the final dev → release pull request |

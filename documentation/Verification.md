@@ -22,7 +22,14 @@ Performed by Moria El Akaya at http://localhost:8080. All steps behaved as expec
 | 7 | US6 | Delete group, then Cancel | Group is kept | Pass |
 | 8 | US6 | Delete group, then Delete | Group no longer listed | Pass |
 
+## Deployed site check – November 24, 2026
+
+After creating `Studyhub-web-env` on AWS Elastic Beanstalk, Moria El Akaya
+opened http://studyhub-web-env.eba-mpbqxqmw.us-east-2.elasticbeanstalk.com,
+created a group, opened its details and returned to the list. All worked.
+Screenshots of every page on the deployed site are taken after the final
+release deploy and are part of the submission.
+
 ## Still to verify
 
-- The same walkthrough on the VLab environment (the instructor's review environment).
-- The same walkthrough on the deployed AWS site (task T9).
+- The full walkthrough on the VLab environment (the instructor's review environment).
