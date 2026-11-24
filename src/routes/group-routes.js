@@ -19,6 +19,23 @@ function queryText(value) {
   return typeof value === 'string' ? value : '';
 }
 
+/** Form fields in the order they appear on the create-group page. */
+const FORM_FIELDS = ['name', 'courseCode', 'capacity', 'description', 'meetingTime', 'location'];
+
+/**
+ * Copy the create-group form fields from a request body as text.
+ *
+ * @param {object} body the parsed form body
+ * @returns {object} one string per form field, blank when missing
+ */
+function readGroupForm(body) {
+  const form = {};
+  for (const field of FORM_FIELDS) {
+    form[field] = queryText(body?.[field]);
+  }
+  return form;
+}
+
 /**
  * Create the router for all /groups pages.
  *
@@ -41,7 +58,31 @@ function createGroupRouter(groupManager) {
     });
   });
 
+  router.get('/new', (request, response) => {
+    response.render('group-form', {
+      title: 'Create a study group',
+      courses: groupManager.getCourses(),
+      form: readGroupForm({}),
+      error: null,
+    });
+  });
+
+  router.post('/', (request, response) => {
+    const form = readGroupForm(request.body);
+    try {
+      groupManager.createGroup(form);
+      response.redirect(303, '/groups');
+    } catch (error) {
+      response.status(400).render('group-form', {
+        title: 'Create a study group',
+        courses: groupManager.getCourses(),
+        form,
+        error: error.message,
+      });
+    }
+  });
+
   return router;
 }
 
-module.exports = { createGroupRouter };
+module.exports = { createGroupRouter, readGroupForm };
